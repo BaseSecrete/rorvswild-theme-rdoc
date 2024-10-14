@@ -1,0 +1,11 @@
+/log/
+/tmp/
+/doc/
+
+/.bundle
+
+*.gem
+*.log
+*.sqlite*
+
+**/.DS_Store
