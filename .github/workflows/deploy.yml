@@ -38,7 +38,7 @@ jobs:
           bundler-cache: true
 
       - name: Build with RDoc
-        run: ./rdoc.rb --root ruby --include ruby/doc --title "Ruby Documentation" --main README.md --template rorvswild --output _site
+        run: ./rorvswild-theme-rdoc --root ruby --include ruby/doc --title "Ruby Documentation" --main README.md --output _site
 
       - name: Setup Pages
         id: pages
