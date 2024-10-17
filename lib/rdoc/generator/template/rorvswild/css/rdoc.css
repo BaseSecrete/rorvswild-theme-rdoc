@@ -46,6 +46,11 @@ body {
   padding-top: 35px;
 }
 
+
+body > footer {
+  display: none; /* quickfix waiting for Ruby to upgrade RDoc and use the latest darkfish.rb */
+}
+
 h1 span,
 h2 span,
 h3 span,
