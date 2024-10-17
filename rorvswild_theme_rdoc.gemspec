@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = ["Antoine Marguerie", "Alexis Bernard"]
   s.description = " RDoc theme for developers with sensitive eyes."
   s.summary = " RDoc theme for developers with sensitive eyes."
-  s.homepage = "https://www.rorvswild.com/theme"
+  s.homepage = "https://github.com/BaseSecrete/rorvswild-theme-rdoc"
   s.email = ""
   s.license = 'MIT'
 
