@@ -14,9 +14,9 @@
   --color-strong-background: oklch(0.97 0.03 59);
   --color-topbar: var(--color-primary);
   --color-topbar-text: var(--color-background);
-  --color-text: oklch(0.4 0.03 269);
-  --color-text-light: oklch(0.5 0.03 269);
-  --color-title: oklch(0.27 0.03 269);
+  --color-text: oklch(0.35 0.03 269);
+  --color-text-light: oklch(0.45 0.03 269);
+  --color-title: oklch(0.2 0.03 269);
   --color-background: oklch(0.99 0.001 269);
   --color-code-background: oklch(0.97 0.002 269);
   --color-th-background: oklch(0.95 0.002 269);
@@ -243,7 +243,7 @@ main h2 {
   font-size: 1.44rem;
   line-height: 3rem;
   color: var(--color-title);
-  box-shadow: 0 2px 0 0 var(--color-text);
+  box-shadow: 0 1px 0 0 var(--color-text-light);
 }
 
 main h3 {
@@ -598,10 +598,10 @@ code {
   --color-constant: oklch(0.5 0.18 269);
   --color-keyword: var(--color-primary);
   --color-ivar: oklch(0.5 0.18 59);
-  --color-operator: oklch(0.38 0.18 269);
+  --color-operator: oklch(0.5 0.18 269);
   --color-identifier: var(--color-title);
   --color-node: oklch(0.5 0.18 149);
-  --color-comment: oklch(0.5 0.03 269);
+  --color-comment: oklch(0.6 0.03 269);
   --color-regexp: oklch(0.5 0.18 299);
   --color-value: var(--color-operator);
   --color-string: oklch(0.5 0.18 149);
@@ -838,15 +838,15 @@ pre + .toggle-source { margin-top: 0.5rem; }
 
   pre,
   code {
-    --color-constant: oklch(0.84 0.09 260);
+    --color-constant: oklch(0.85 0.09 260);
     --color-keyword: var(--color-primary);
     --color-ivar: oklch(0.85 0.09 59);
-    --color-operator: oklch(0.91 0.04 269);
+    --color-operator: oklch(0.85 0.04 269);
     --color-identifier: var(--color-title);
-    --color-node: oklch(0.83 0.09 149);
-    --color-comment: oklch(0.69 0.02 269);
+    --color-node: oklch(0.85 0.09 149);
+    --color-comment: oklch(0.65 0.02 269);
     --color-regexp: oklch(0.85 0.09 299);
     --color-value: var(--color-operator);
-    --color-string: oklch(0.83 0.09 149);
+    --color-string: oklch(0.85 0.09 149);
   }
 }
