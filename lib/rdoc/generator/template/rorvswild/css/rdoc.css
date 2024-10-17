@@ -11,7 +11,7 @@
 
   --color-primary: oklch(0.5 0.18 29);
   --color-primary-hover: oklch(0.4 0.18 29);
-  --color-strong-background: oklch(0.97 0.03 59);
+  --color-strong-background: oklch(0.97 0.03 89);
   --color-topbar: var(--color-primary);
   --color-topbar-text: var(--color-background);
   --color-text: oklch(0.35 0.03 269);
@@ -194,7 +194,7 @@ summary::-webkit-details-marker { display: none; }
 
 details > summary::after {
   content: '+';
-  font-size: 0.833em;
+  font-size: 0.823em;
   font-weight: bold;
   width: 2em;
   height: 2em;
@@ -221,11 +221,11 @@ main {
 
 main sup {
   vertical-align: super;
-  font-size: 0.8em;
+  font-size: 0.823em;
 }
 
 main h1 {
-  font-size: 2.074rem;
+  font-size: 2.178rem;
   line-height: 3rem;
   margin: 1rem 0 0;
   color: var(--color-title);
@@ -233,14 +233,14 @@ main h1 {
 }
 
 main h1 + p {
-  font-size: 1.44em;
+  font-size: 1.383em;
   margin-top: 0.5rem;
   color: var(--color-text-light);
 }
 
 main h2 {
   margin: 1.5em 0 0.5em;
-  font-size: 1.44rem;
+  font-size: 1.476rem;
   line-height: 3rem;
   color: var(--color-title);
   box-shadow: 0 1px 0 0 var(--color-text-light);
@@ -248,7 +248,7 @@ main h2 {
 
 main h3 {
   margin: 1.5em 0 0.5em;
-  font-size: 1.2em;
+  font-size: 1.215em;
   color: var(--color-title);
 }
 
@@ -268,7 +268,7 @@ main h5 {
 
 main h6 {
   margin: 1em 0 0;
-  font-size: 0.833rem;
+  font-size: 0.823rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--color-title);
@@ -288,7 +288,7 @@ main p {
 main pre {
   margin: 1em 0;
   padding: 1em 1.5em;
-  font-size: 0.833rem;
+  font-size: 0.823rem;
 }
 
 main hr {
@@ -367,7 +367,7 @@ nav {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  font-size: 0.833rem;
+  font-size: 0.823rem;
   line-height: 1.5rem;
 }
 
@@ -381,7 +381,7 @@ nav[hidden] { display: none; }
 nav footer {
   padding: 1em 1rem;
   border-top: 1px solid var(--color-border);
-  font-size: 0.694rem;
+  font-size: 0.678rem;
 }
 
 nav footer a:any-link {
@@ -421,7 +421,7 @@ nav footer a:any-link {
 nav h2 {
   margin: 0 0 0.5em;
   padding: 0.5em 0;
-  font-size: 1.2em;
+  font-size: 1.215em;
   color: var(--color-text);
   border-bottom: 1px solid var(--color-border);
 }
@@ -430,7 +430,7 @@ nav h3,
 #table-of-contents-navigation {
   margin: 0;
   padding: 0.5em 0;
-  font-size: 0.694rem;
+  font-size: 0.678rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -523,7 +523,7 @@ nav.contextual { display: none }
   border: 1px solid var(--color-border);
   color: var(--color-text);
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 0.823em;
   outline: none;
   transition: border-color 0.3s ease;
   background-color: var(--color-background);
@@ -586,7 +586,7 @@ nav.contextual { display: none }
 }
 
 #search-results pre {
-  font-size: 0.833rem;
+  font-size: 0.823em;
   margin: 0.5rem 0;
 }
 
@@ -611,7 +611,7 @@ code {
   background-color: var(--color-code-background);
   padding: 0em 0.4em;
   border-radius: 3px;
-  font-size: 1em;
+  font-size: 0.937em;
   line-height: 1em;
   text-transform: initial;
 }
@@ -652,10 +652,9 @@ em {
   margin-bottom: 0.75em;
   padding-left: 0;
   font-family: var(--font-mono);
-  font-size: 110%;
 }
 
-.constants-list > dl dt a { color: inherit; }
+.c > dl dt a { color: inherit; }
 
 .constants-list > dl dd {
   margin: 0 0 2em 0;
@@ -700,7 +699,7 @@ em {
 
 .toggle-source {
   margin-top: 1rem;
-  font-size: 0.833rem;
+  font-size: 0.823rem;
   font-weight: 400;
   line-height: 1rem;
   background: var(--color-code-background);
@@ -822,7 +821,7 @@ pre + .toggle-source { margin-top: 0.5rem; }
     --color-primary: oklch(0.85 0.09 29);
     --color-primary-hover: oklch(87.78296875% 0.07 29);
 
-    --color-strong-background: oklch(0.27 0.04 59);
+    --color-strong-background: oklch(0.27 0.04 89);
 
     --color-topbar: oklch(0.5 0.18 29);
     --color-topbar-text: oklch(0.99 0.001 269);
