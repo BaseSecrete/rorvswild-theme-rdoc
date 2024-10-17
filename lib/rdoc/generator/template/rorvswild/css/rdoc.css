@@ -6,6 +6,7 @@
  */
 
 :root {
+  --page-max-width: 1600px;
   --sidebar-width: 240px;
 
   --color-primary: oklch(0.5 0.18 29);
@@ -45,7 +46,6 @@ body {
   margin: 0;
   padding-top: 35px;
 }
-
 
 body > footer {
   display: none; /* quickfix waiting for Ruby to upgrade RDoc and use the latest darkfish.rb */
@@ -333,17 +333,22 @@ main header h3 {
   position: fixed;
   top: 0;
   background-color: var(--color-topbar);
+}
+
+.topbar .width-limiter {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
   display: flex;
   gap: 8px;
 }
 
-.topbar > a:any-link {
+.topbar .width-limiter > a:any-link {
   text-decoration: none;
   font-weight: 700;
   color: var(--color-topbar-text);
 }
 
-.topbar > a:any-link:hover { color: var(--color-topbar-text); }
+.topbar .width-limiter > a:any-link:hover { color: var(--color-topbar-text); }
 
 #navigation-toggle {
   display: inline-block;
@@ -355,7 +360,6 @@ nav {
   position: fixed;
   top: 35px;
   bottom: 0;
-  left: 0;
   width: 100%;
   max-width: var(--sidebar-width);
   background: var(--color-background);
@@ -758,7 +762,6 @@ pre + .toggle-source { margin-top: 0.5rem; }
   main {
     margin: 0 auto;
     width: 100%;
-    max-width: 1300px;
     padding: 0;
     position: relative;
     grid-column: 2/ span 1;
@@ -793,11 +796,14 @@ pre + .toggle-source { margin-top: 0.5rem; }
 @media (min-width: 1024px) {
   html { font-size: 16px; }
 
-  body { 
-    padding-top: 40px;
+  body > .wrapper {
     display: grid;
     grid-template-columns: var(--sidebar-width) auto;
     gap: 1rem;
+    width: 100%;
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    position: relative;
   }
 
   #navigation-toggle { display: none }
