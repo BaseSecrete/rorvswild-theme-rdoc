@@ -15,13 +15,13 @@ If you want to use this theme in your documentation:
 gem install rorvswild_theme_rdoc
 
 # Generate the documentation
-rdoc --root path/to/source/code --template=rorvswild
+rdoc --root path/to/source/code --template rorvswild
 ```
 
 ## Development
 
-Call the custom `rdoc.rb` script which automatically loads RoRvsWild's theme.
+Call the custom `rorvswild-theme-rdoc` script which automatically loads RoRvsWild's theme.
 
 ```
-./rdoc.rb --root path/to/source/code --template rorvswild
+./rorvswild-theme-rdoc --root path/to/source/code
 ```

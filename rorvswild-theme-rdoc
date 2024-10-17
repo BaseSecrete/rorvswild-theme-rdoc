@@ -5,4 +5,5 @@ $LOAD_PATH.prepend(File.expand_path(File.dirname(__FILE__)) + "/lib")
 require "rdoc"
 require "rorvswild_theme_rdoc"
 
+ARGV << "--template=rorvswild"
 RDoc::RDoc.new.document(ARGV)
