@@ -688,14 +688,17 @@ em {
 .method-heading {
   position: relative;
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 1.138rem;
   font-weight: bold;
   color: var(--color-text);
 }
 
 .method-heading span { background-color: var(--color-code-background); }
 
-.method-heading :any-link { color: inherit; }
+.method-heading :any-link {
+  text-decoration: none;
+  color: inherit;
+}
 
 .toggle-source {
   margin-top: 1rem;
@@ -720,13 +723,14 @@ pre + .toggle-source { margin-top: 0.5rem; }
 .method-description,
 .aliases {
   color: var(--color-text-light);
-  margin-top: 0.5em;
+  margin-top: 1em;
 }
 
 .aliases {
-  padding-top: 4px;
-  font-style: italic;
   cursor: default;
+  font-size: 0.823em;
+  font-style: italic;
+  padding-top: 4px;
 }
 
 .method-description p { margin: 0; }
