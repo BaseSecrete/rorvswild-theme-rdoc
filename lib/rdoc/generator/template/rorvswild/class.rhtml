@@ -30,7 +30,14 @@
                   <%- constants.each do |const| -%>
                     <dt id="<%= const.name %>"><%= const.name %></dt>
                     <%- if const.comment then -%>
-                      <dd><%= const.description.strip %></dd>
+                      <dd>
+                        <%- if const.mixin_from then -%>
+                          <div class="mixin-from">
+                            Included from <a href="<%= klass.aref_to(const.mixin_from.path)%>"><%= const.mixin_from.full_name %></a>
+                          </div>
+                        <%- end -%>
+                        <%= const.description.strip %>
+                      </dd>
                     <%- else -%>
                       <dd class="missing-docs">(Not documented)</dd>
                     <%- end -%>
@@ -54,6 +61,11 @@
                     </div>
 
                     <div class="method-description">
+                      <%- if attrib.mixin_from then -%>
+                        <div class="mixin-from">
+                          <%= attrib.singleton ? "Extended" : "Included" %> from <a href="<%= klass.aref_to(attrib.mixin_from.path)%>"><%= attrib.mixin_from.full_name %></a>
+                        </div>
+                      <%- end -%>
                       <%- if attrib.comment then -%>
                         <%= attrib.description.strip %>
                       <%- else -%>
@@ -107,6 +119,11 @@
 
                     <%- unless method.skip_description? then -%>
                       <div class="method-description">
+                        <%- if method.mixin_from then -%>
+                          <div class="mixin-from">
+                            <%= method.singleton ? "Extended" : "Included" %> from <a href="<%= klass.aref_to(method.mixin_from.path)%>"><%= method.mixin_from.full_name %></a>
+                          </div>
+                        <%- end -%>
                         <%- if method.comment then -%>
                           <%= method.description.strip %>
                         <%- else -%>

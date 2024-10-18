@@ -736,6 +736,12 @@ pre + .toggle-source { margin-top: 0.5rem; }
 .method-description p { margin: 0; }
 
 .method-description ul { margin-left: 1.5em; }
+
+main .mixin-from {
+  font-size: 0.823em;
+  font-style: italic;
+  margin-bottom: 0.75em;
+}
  
 #attribute-method-details .method-detail:hover {
   background-color: transparent;
