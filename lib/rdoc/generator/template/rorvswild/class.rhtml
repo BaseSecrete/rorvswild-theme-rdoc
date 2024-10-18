@@ -31,11 +31,13 @@
                     <dt id="<%= const.name %>"><%= const.name %></dt>
                     <%- if const.comment then -%>
                       <dd>
-                        <%- if const.mixin_from then -%>
+                        <!-- commented future feature
+                        <%#- if const.mixin_from then -%>
                           <div class="mixin-from">
-                            Included from <a href="<%= klass.aref_to(const.mixin_from.path)%>"><%= const.mixin_from.full_name %></a>
+                            Included from <a href="<%#= klass.aref_to(const.mixin_from.path)%>"><%#= const.mixin_from.full_name %></a>
                           </div>
-                        <%- end -%>
+                        <%#- end -%>
+                        -->
                         <%= const.description.strip %>
                       </dd>
                     <%- else -%>
@@ -61,11 +63,13 @@
                     </div>
 
                     <div class="method-description">
-                      <%- if attrib.mixin_from then -%>
+                      <!-- commented future feature
+                      <%#- if attrib.mixin_from then -%>
                         <div class="mixin-from">
-                          <%= attrib.singleton ? "Extended" : "Included" %> from <a href="<%= klass.aref_to(attrib.mixin_from.path)%>"><%= attrib.mixin_from.full_name %></a>
+                          <%#= attrib.singleton ? "Extended" : "Included" %> from <a href="<%#= klass.aref_to(attrib.mixin_from.path)%>"><%#= attrib.mixin_from.full_name %></a>
                         </div>
-                      <%- end -%>
+                      <%#- end -%>
+                      -->
                       <%- if attrib.comment then -%>
                         <%= attrib.description.strip %>
                       <%- else -%>
@@ -119,11 +123,13 @@
 
                     <%- unless method.skip_description? then -%>
                       <div class="method-description">
-                        <%- if method.mixin_from then -%>
+                        <!-- commented future feature
+                        <%#- if method.mixin_from then -%>
                           <div class="mixin-from">
-                            <%= method.singleton ? "Extended" : "Included" %> from <a href="<%= klass.aref_to(method.mixin_from.path)%>"><%= method.mixin_from.full_name %></a>
+                            <%#= method.singleton ? "Extended" : "Included" %> from <a href="<%#= klass.aref_to(method.mixin_from.path)%>"><%#= method.mixin_from.full_name %></a>
                           </div>
-                        <%- end -%>
+                        <%#- end -%>
+                        -->
                         <%- if method.comment then -%>
                           <%= method.description.strip %>
                         <%- else -%>
