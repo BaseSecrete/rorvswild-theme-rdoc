@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name = "rorvswild_theme_rdoc"
-  s.version = "0.1"
+  s.version = "0.2"
 
   s.authors = ["Antoine Marguerie", "Alexis Bernard"]
   s.description = " RDoc theme for developers with sensitive eyes."
