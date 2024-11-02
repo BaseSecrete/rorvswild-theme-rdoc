@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.summary = " RDoc theme for developers with sensitive eyes."
   s.homepage = "https://github.com/BaseSecrete/rorvswild-theme-rdoc"
   s.email = ""
-  s.license = 'MIT'
+  s.license = "MIT"
 
-  s.require_path = 'lib'
-  s.files  = ["lib"]
+  s.require_path = "lib"
+  s.files = Dir["lib/**/*", "README.md"]
 end
