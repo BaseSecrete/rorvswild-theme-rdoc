@@ -29,16 +29,17 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ruby/ruby
+          fetch-depth: 0
           path: ruby
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
+          ruby-version: "3.4"
           bundler-cache: true
 
       - name: Build with RDoc
-        run: ./rorvswild-theme-rdoc --root ruby --include ruby/doc --title "Ruby Documentation" --main README.md --output _site
+        run: rake site:build
 
       - name: Setup Pages
         id: pages
