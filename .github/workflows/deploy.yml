@@ -2,7 +2,7 @@ name: Deploy Ruby documentation
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master", "build_rails_doc"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -31,6 +31,13 @@ jobs:
           repository: ruby/ruby
           fetch-depth: 0
           path: ruby
+
+      - name: Checkout Rails
+        uses: actions/checkout@v4
+        with:
+          repository: rails/rails
+          fetch-depth: 0
+          path: rails
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
