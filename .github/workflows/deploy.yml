@@ -39,6 +39,13 @@ jobs:
           fetch-depth: 0
           path: rails
 
+      - name: Checkout RDoc
+        uses: actions/checkout@v4
+        with:
+          repository: ruby/rdoc
+          fetch-depth: 0
+          path: rdoc
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:

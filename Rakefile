@@ -5,18 +5,24 @@ require "rorvswild_theme_rdoc"
 
 namespace :site do
   task :build do
-    RorVsWildThemeRdoc::Site.build(ruby: ENV["RUBY_DIR"] || "ruby", rails: ENV["RAILS_DIR"] || "rails")
+    RorVsWildThemeRdoc::Site.build(ruby: ENV["RUBY_DIR"] || "ruby", rails: ENV["RAILS_DIR"] || "rails", rdoc: ENV["RDOC_DIR"] || "rdoc")
   end
 end
 
 module RorVsWildThemeRdoc
   class Site
-    @ruby_tags = %w[master v2_7_0 v3_0_0 v3_1_0 v3_2_0 v3_3_0 v3_4_0]
-    @rails_tags = %w[main v6.0.0 v6.1.0 v7.0.0 v7.1.0 v7.2.0 v8.0.0]
+    @ruby_tags = %w[v3_2_0 v3_3_0 v3_4_0]
+    @rails_tags = %w[v7.1.0 v7.2.0 v8.0.0]
+    @rdoc_tags = %w[v6.13.1 v6.11.1 v6.10.0]
+
+    @ruby_tags = %w[v3_4_0]
+    @rails_tags = %w[v8.0.0]
+    @rdoc_tags = %w[v6.13.1]
 
     def self.build(dirs)
       build_doc(dirs[:ruby], @ruby_tags, "Ruby %{version} Documentation") if dirs[:ruby]
       build_doc(dirs[:rails], @rails_tags, "Rails %{version} Documentation") if dirs[:rails]
+      build_doc(dirs[:rdoc], @rdoc_tags, "RDoc %{version} Documentation") if dirs[:rdoc]
       system("mv _site/ruby/master/* _site/") if File.exist?("_site/ruby/master")
     end
 
