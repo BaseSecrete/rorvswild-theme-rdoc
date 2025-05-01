@@ -29,9 +29,9 @@ module RorVsWildThemeRdoc
     def self.build_doc(repository_dir, tags, title)
       for tag in tags
         system("git -C #{repository_dir} checkout #{tag}")
-        version = tag_to_version(tag)
+        path = version_to_path(version = tag_to_version(tag))
         versionned_title = title % {version: version}
-        site_dir =  File.join("_site", File.basename(repository_dir), version)
+        site_dir =  File.join("_site", File.basename(repository_dir), path)
         options = ["--root=#{repository_dir}", "--include=#{repository_dir}/doc", "--title=#{versionned_title}", "--main=README.md", "--output=#{site_dir}", "--template=rorvswild"]
         RDoc::RDoc.new.document(options)
       end
@@ -42,6 +42,13 @@ module RorVsWildThemeRdoc
       version = tag.delete_prefix("v")
       version.gsub!("_", ".")
       version
+    end
+
+    # Remove patch number: 1.2.3 -> 1.2
+    def self.version_to_path(version)
+      return version unless dot1 = version.index(".")
+      return version unless dot2 = version.index(".", dot1 + 1)
+      version[0...dot2]
     end
   end
 end
