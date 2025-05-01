@@ -25,34 +25,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Checkout Ruby
-        uses: actions/checkout@v4
-        with:
-          repository: ruby/ruby
-          fetch-depth: 0
-          path: ruby
-
-      - name: Checkout Rails
-        uses: actions/checkout@v4
-        with:
-          repository: rails/rails
-          fetch-depth: 0
-          path: rails
-
-      - name: Checkout RDoc
-        uses: actions/checkout@v4
-        with:
-          repository: ruby/rdoc
-          fetch-depth: 0
-          path: rdoc
-
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.4"
           bundler-cache: true
 
-      - name: Build with RDoc
+      - name: Build Site
         run: rake site:build
 
       - name: Setup Pages

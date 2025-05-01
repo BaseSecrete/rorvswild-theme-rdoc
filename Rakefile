@@ -5,39 +5,66 @@ require "rorvswild_theme_rdoc"
 
 namespace :site do
   task :build do
-    RorVsWildThemeRdoc::Site.build(ruby: ENV["RUBY_DIR"] || "ruby", rails: ENV["RAILS_DIR"] || "rails", rdoc: ENV["RDOC_DIR"] || "rdoc")
+    RorVsWildThemeRdoc::Site.build(
+      "https://github.com/ruby/ruby.git" => %w[v3_2_0 v3_3_0 v3_4_0] ,
+      "https://github.com/ruby/rdoc.git" => %w[v6.13.1 v6.11.1 v6.10.0],
+      "https://github.com/rails/rails.git" => %w[v7.1.0 v7.2.0 v8.0.0],
+    )
   end
 end
 
 module RorVsWildThemeRdoc
-  class Site
-    @ruby_tags = %w[v3_2_0 v3_3_0 v3_4_0]
-    @rails_tags = %w[v7.1.0 v7.2.0 v8.0.0]
-    @rdoc_tags = %w[v6.13.1 v6.11.1 v6.10.0]
+  class Repository
+    attr_reader :name, :dir
 
-    @ruby_tags = %w[v3_4_0]
-    @rails_tags = %w[v8.0.0]
-    @rdoc_tags = %w[v6.13.1]
-
-    def self.build(dirs)
-      build_doc(dirs[:ruby], @ruby_tags, "Ruby %{version} Documentation") if dirs[:ruby]
-      build_doc(dirs[:rails], @rails_tags, "Rails %{version} Documentation") if dirs[:rails]
-      build_doc(dirs[:rdoc], @rdoc_tags, "RDoc %{version} Documentation") if dirs[:rdoc]
-      system("mv _site/ruby/master/* _site/") if File.exist?("_site/ruby/master")
+    def initialize(url)
+      @url = url
+      @name = File.basename(@url, File.extname(@url))
+      @dir = "repositories/#{name}"
     end
 
-    def self.build_doc(repository_dir, tags, title)
-      for tag in tags
-        system("git -C #{repository_dir} checkout #{tag}")
-        path = version_to_path(version = tag_to_version(tag))
-        versionned_title = title % {version: version}
-        site_dir =  File.join("_site", File.basename(repository_dir), path)
-        options = ["--root=#{repository_dir}", "--include=#{repository_dir}/doc", "--title=#{versionned_title}", "--main=README.md", "--output=#{site_dir}", "--template=rorvswild"]
-        RDoc::RDoc.new.document(options)
+    def clone_quickly
+      parent_dir = File.dirname(dir)
+      Dir.exist?(parent_dir) or Dir.mkdir(parent_dir)
+      system("git -C #{parent_dir} clone --filter=tree:0 #{@url}") if !File.exist?(@dir)
+    end
+
+    def checkout(tag)
+      system("git -C #{@dir} checkout #{tag}")
+    end
+  end
+
+  class Project
+    attr_reader :name
+
+    def initialize(repository, tags)
+      @repository = repository
+      @tags = tags
+      @name = @repository.name.capitalize
+    end
+
+    def build_doc(dir)
+      @repository.clone_quickly
+      for tag in @tags
+        @repository.checkout(tag)
+        Documentation.new(self, tag).build(File.join(dir, @repository.name))
       end
     end
 
-    # Normalize tag names since Ruby repository uses v3_4_0, but version numbers are written this way 3.4.0.
+    def dir
+      @repository.dir
+    end
+  end
+
+  class Documentation
+    def initialize(project, tag)
+      @project = project
+      @tag = tag
+      @version = self.class.tag_to_version(@tag)
+      @path = self.class.version_to_path(@version)
+    end
+
+    # Normalize tag names since Ruby repository uses v3_4_0, but version numbers are written as 3.4.0.
     def self.tag_to_version(tag)
       version = tag.delete_prefix("v")
       version.gsub!("_", ".")
@@ -49,6 +76,24 @@ module RorVsWildThemeRdoc
       return version unless dot1 = version.index(".")
       return version unless dot2 = version.index(".", dot1 + 1)
       version[0...dot2]
+    end
+
+    def build(dir)
+      versionned_dir = File.join(dir, @path)
+      title = "#{@project.name} #{@version} Documentation"
+      options = ["--root=#{@project.dir}", "--include=#{@project.dir}/doc", "--title=#{title}", "--main=#{main_file}", "--output=#{versionned_dir}", "--template=rorvswild"]
+      RDoc::RDoc.new.document(options)
+    end
+
+    def main_file
+      ["README.md", "README.rdoc", "README"].find { |file| File.exist?(File.join(@project.dir, file)) }
+    end
+  end
+
+  class Site
+    def self.build(urls_and_tags)
+      projects = urls_and_tags.map { |(url, tags)| Project.new(Repository.new(url), tags) }
+      projects.each { |project| project.build_doc("_site") }
     end
   end
 end
