@@ -9,3 +9,6 @@
 *.sqlite*
 
 **/.DS_Store
+
+/_site
+/repositories

@@ -18,7 +18,7 @@ namespace :site do
   end
 
   desc "Build docs and pages"
-  task build: ["site:docs", "site:templates"]
+  task build: ["site:build:docs", "site:build:pages"]
 
   def site
     @site ||= RorVsWildThemeRdoc::Site.new(
