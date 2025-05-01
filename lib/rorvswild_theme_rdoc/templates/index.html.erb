@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Documentation</title>
+  </head>
+
+  <body>
+    <h1>Some Ruby documentation</h1>
+    <ul>
+      <% for project in @projects %>
+        <li>
+          <a href="<%= project.docs.first.url %>"><%= project.name %></a>
+          <details>
+            <summary>More</summary>
+            <ul>
+              <% for doc in project.docs %>
+                <li><a href="<%= doc.url %>"><%= doc.version %></a></li>
+              <% end %>
+            </ul>
+          </details>
+        </li>
+      <% end %>
+    </ul>
+  </body>
+</html>
