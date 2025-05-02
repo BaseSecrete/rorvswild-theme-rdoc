@@ -118,7 +118,9 @@ section.contact h2 {
   box-shadow: none;
 }
 
-section.contact p { color: inherit; opacity: 0.7; }
+section.contact p { color: oklch(from var(--color-topbar-text) l c h / 0.7); }
+section.contact p a { color: inherit; }
+section.contact p a:hover { color: var(--color-topbar-text); }
 
 section.contact .button {
   display: inline-block;
