@@ -96,7 +96,7 @@ module RorVsWildThemeRdoc
 
     def build(src_dir, doc_dir)
       versionned_dir = File.join(doc_dir, @url)
-      title = "#{@project.url} #{@version} Documentation"
+      title = "#{@project.url} #{@version} documentation"
       options = ["--root=#{src_dir}", "--include=#{src_dir}/doc", "--title=#{title}", "--main=#{main_file(src_dir)}", "--output=#{versionned_dir}", "--template=rorvswild"]
       RDoc::RDoc.new.document(options)
     end
