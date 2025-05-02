@@ -52,7 +52,7 @@
             <li class="card">
               <% if project.docs.size > 1 %>
                 <details>
-                  <summary><a href="<%= project.docs.first.url %>"><%= project.name %></a></summary>
+                  <summary><a href="<%= project.docs.first.url %>"><%= project.url %></a></summary>
                   <ul>
                     <% for doc in project.docs %>
                       <li><a href="<%= doc.url %>"><span class="version"><%= doc.version %></span></a></li>
@@ -60,7 +60,7 @@
                   </ul>
                 </details>
               <% else %>
-                <a href="<%= project.docs.first.url %>"><%= project.name %></a>
+                <a href="<%= project.docs.first.url %>"><%= project.url %></a>
               <% end %>
             </li>
           <% end %>

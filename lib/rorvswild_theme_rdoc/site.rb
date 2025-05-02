@@ -34,7 +34,7 @@ module RorVsWildThemeRdoc
     end
 
     class Gem
-      attr_reader :name#, :dir
+      attr_reader :name
 
       def initialize(name)
         @info = Gems.info(@name = name)
@@ -52,13 +52,12 @@ module RorVsWildThemeRdoc
   end
 
   class Project
-    attr_reader :name, :docs, :url
+    attr_reader :docs, :url
 
     def initialize(repository, tags)
       @repository = repository
       @tags = tags
       @url = @repository.name
-      @name = @repository.name.capitalize
       @docs = @tags.map { |tag| Documentation.new(self, tag) }
     end
 
@@ -83,8 +82,8 @@ module RorVsWildThemeRdoc
 
     # Normalize tag names since Ruby repository uses v3_4_0, but version numbers are written as 3.4.0.
     def self.tag_to_version(tag)
-      version = tag.delete_prefix("v")
-      version.gsub!("_", ".")
+      version = tag.gsub(/^[^\d]*/, "")
+      version.tr!("_", ".")
       version
     end
 
@@ -97,7 +96,7 @@ module RorVsWildThemeRdoc
 
     def build(src_dir, doc_dir)
       versionned_dir = File.join(doc_dir, @url)
-      title = "#{@project.name} #{@version} Documentation"
+      title = "#{@project.url} #{@version} Documentation"
       options = ["--root=#{src_dir}", "--include=#{src_dir}/doc", "--title=#{title}", "--main=#{main_file(src_dir)}", "--output=#{versionned_dir}", "--template=rorvswild"]
       RDoc::RDoc.new.document(options)
     end
@@ -117,6 +116,7 @@ module RorVsWildThemeRdoc
     end
 
     def build_pages
+      FileUtils.mkpath("_site")
       template = ERB.new(File.read("lib/rorvswild_theme_rdoc/site/index.html.erb"))
       File.write("_site/index.html", template.result(binding))
       `cp -R lib/rdoc/generator/template/rorvswild/css/* _site`
