@@ -1,11 +1,16 @@
 <header class="topbar">
   <div class="width-limiter">
-    <%= render '_sidebar_toggle.rhtml' %>
     <% if defined?(RorVsWildThemeRdoc::Site) %>
-      <a href="../..">
-        <img src="../../apple-touch-icon.png" style="width: 32px;"/>
+      <a href="../.." class="logo" title="RubyRubyRubyRuby">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="m8 6h-2l-2-2 4-4 4 4-2 2z"/>
+          <path d="m8 10h2l2 2-4 4-4-4 2-2z"/>
+          <path d="m10 8v-2l2-2 4 4-4 4-2-2z"/>
+          <path d="m6 8v2l-2 2-4-4 4-4 2 2z"/>
+        </svg>
       </a>
     <% end %>
+    <%= render '_sidebar_toggle.rhtml' %>
     <a href="<%= rel_prefix %>/index.html" rel="home"><%= @options.title %></a>
     <button type="button" aria-label="Search" class="search-button">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>

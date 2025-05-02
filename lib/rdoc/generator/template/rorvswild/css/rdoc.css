@@ -350,6 +350,14 @@ main header h3 {
 
 .topbar .width-limiter > a:any-link:hover { color: var(--color-topbar-text); }
 
+.topbar .width-limiter > a.logo { display: inline-flex; }
+
+.topbar .width-limiter > a.logo svg {
+  height: 24px;
+  width: 24px;
+  fill: currentcolor;
+}
+
 #navigation-toggle {
   display: inline-block;
   color: var(--color-topbar-text);
