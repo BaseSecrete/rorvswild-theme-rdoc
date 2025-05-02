@@ -117,25 +117,10 @@ module RorVsWildThemeRdoc
     end
 
     def build_pages
-      template = ERB.new(File.read("lib/rorvswild_theme_rdoc/templates/index.html.erb"))
+      template = ERB.new(File.read("lib/rorvswild_theme_rdoc/site/index.html.erb"))
       File.write("_site/index.html", template.result(binding))
-      # stylesheets
-      theme = File.read("lib/rdoc/generator/template/rorvswild/css/rdoc.css")
-      File.write("_site/rdoc.css", theme)
-      fonts = File.read("lib/rdoc/generator/template/rorvswild/css/fonts.css")
-      File.write("_site/fonts.css", fonts)
-      style = File.read("lib/rorvswild_theme_rdoc/templates/style.css")
-      File.write("_site/style.css", style)
-      # favicons
-      favicon = File.read("lib/rorvswild_theme_rdoc/templates/favicon.ico")
-      File.write("_site/favicon.ico", favicon)
-      apple_touch_icon = File.read("lib/rorvswild_theme_rdoc/templates/apple-touch-icon.png")
-      File.write("_site/apple-touch-icon.png", apple_touch_icon)
-      icon = File.read("lib/rorvswild_theme_rdoc/templates/icon.svg")
-      File.write("_site/icon.svg", icon)
-      # og image
-      og_image = File.read("lib/rorvswild_theme_rdoc/templates/rubyrubyrubyruby-og.png")
-      File.write("_site/rubyrubyrubyruby-og.png", og_image)
+      `cp -R lib/rdoc/generator/template/rorvswild/css/* _site`
+      `cp lib/rorvswild_theme_rdoc/site/* _site`
     end
   end
 end
