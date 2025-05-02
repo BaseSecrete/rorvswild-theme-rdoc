@@ -7,7 +7,7 @@ GEM
       date
       stringio
     rake (13.2.1)
-    rdoc (6.13.1)
+    rdoc (6.12.0)
       psych (>= 4.0.0)
     stringio (3.1.7)
 
@@ -18,7 +18,7 @@ PLATFORMS
 DEPENDENCIES
   gems
   rake
-  rdoc
+  rdoc (= 6.12.0)
 
 BUNDLED WITH
    2.6.7
