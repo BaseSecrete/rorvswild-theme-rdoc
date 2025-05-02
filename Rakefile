@@ -24,7 +24,7 @@ namespace :site do
     @site ||= RorVsWildThemeRdoc::Site.new(
       "https://github.com/ruby/ruby.git" => %w[v3_2_0 v3_3_0 v3_4_0].reverse,
       "https://github.com/rails/rails.git" => %w[v7.1.0 v7.2.0 v8.0.0].reverse,
-      "https://github.com/ruby/rdoc.git" => %w[v6.13.1 v6.11.1 v6.10.0].reverse,
+      "https://github.com/ruby/rdoc.git" => %w[v6.10.0 v6.11.1 v6.13.1].reverse,
     )
   end
 end
