@@ -32,7 +32,7 @@ jobs:
           bundler-cache: true
 
       - name: Build Site
-        run: rake site:build
+        run: bundle exec rake site:build
 
       - name: Setup Pages
         id: pages

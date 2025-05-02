@@ -1,0 +1,24 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    date (3.4.1)
+    gems (1.3.0)
+    psych (5.2.4)
+      date
+      stringio
+    rake (13.2.1)
+    rdoc (6.13.1)
+      psych (>= 4.0.0)
+    stringio (3.1.7)
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  gems
+  rake
+  rdoc
+
+BUNDLED WITH
+   2.6.7
