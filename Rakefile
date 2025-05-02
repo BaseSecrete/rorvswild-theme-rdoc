@@ -136,6 +136,9 @@ module RorVsWildThemeRdoc
       File.write("_site/apple-touch-icon.png", apple_touch_icon)
       icon = File.read("lib/rorvswild_theme_rdoc/templates/icon.svg")
       File.write("_site/icon.svg", icon)
+      # og image
+      og_image = File.read("lib/rorvswild_theme_rdoc/templates/rubyrubyrubyruby-og.png")
+      File.write("_site/rubyrubyrubyruby-og.png", og_image)
     end
   end
 end
