@@ -55,7 +55,7 @@
                   <summary><a href="<%= project.docs.first.url %>"><%= project.url %></a></summary>
                   <ul>
                     <% for doc in project.docs %>
-                      <li><a href="<%= doc.url %>"><span class="version"><%= doc.version %></span></a></li>
+                      <li><a href="<%= doc.url %>"><span class="version"><%= doc.version.number %></span></a></li>
                     <% end %>
                   </ul>
                 </details>

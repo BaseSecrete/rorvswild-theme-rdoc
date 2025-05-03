@@ -51,34 +51,8 @@ module RorVsWildThemeRdoc
     end
   end
 
-  class Project
-    attr_reader :docs, :url
-
-    def initialize(repository, tags)
-      @repository = repository
-      @tags = tags
-      @url = @repository.name
-      @docs = @tags.map { |tag| Documentation.new(self, tag) }
-    end
-
-    def build_docs(dir)
-      @docs.each { |doc| doc.build(@repository.checkout(doc.tag), dir) }
-    end
-
-    def dir
-      @repository.dir
-    end
-  end
-
-  class Documentation
-    attr_reader :tag, :url, :version
-
-    def initialize(project, tag)
-      @project = project
-      @tag = tag
-      @version = self.class.tag_to_version(@tag)
-      @url = File.join(project.url, self.class.version_to_path(@version))
-    end
+  class Version
+    attr_reader :tag, :number, :short_number
 
     # Normalize tag names since Ruby repository uses v3_4_0, but version numbers are written as 3.4.0.
     def self.tag_to_version(tag)
@@ -88,15 +62,47 @@ module RorVsWildThemeRdoc
     end
 
     # Remove patch number: 1.2.3 -> 1.2
-    def self.version_to_path(version)
+    def self.shorten_number(version)
       return version unless dot1 = version.index(".")
       return version unless dot2 = version.index(".", dot1 + 1)
       version[0...dot2]
     end
 
+    def initialize(tag)
+      @number = self.class.tag_to_version(@tag = tag)
+      @short_number = self.class.shorten_number(@number)
+    end
+  end
+
+  class Project
+    attr_reader :docs, :url
+
+    def initialize(repository, tags)
+      @url = (@repository = repository).name
+      @versions = (@tags = tags).map { |tag| Version.new(tag) }
+      @docs = @versions.map { |version| Documentation.new(self, version) }
+    end
+
+    def build_docs(dir)
+      @docs.each { |doc| doc.build(@repository.checkout(doc.version.tag), dir) }
+    end
+
+    def dir
+      @repository.dir
+    end
+  end
+
+  class Documentation
+    attr_reader :url, :version
+
+    def initialize(project, version)
+      @project, @version = project, version
+      @url = File.join(project.url, @version.short_number)
+    end
+
     def build(src_dir, doc_dir)
       versionned_dir = File.join(doc_dir, @url)
-      title = "#{@project.url} #{@version} documentation"
+      title = "#{@project.url} #{@version.number} documentation"
       options = ["--root=#{src_dir}", "--include=#{src_dir}/doc", "--title=#{title}", "--main=#{main_file(src_dir)}", "--output=#{versionned_dir}", "--template=rorvswild"]
       RDoc::RDoc.new.document(options)
     end
