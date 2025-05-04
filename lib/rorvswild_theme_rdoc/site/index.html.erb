@@ -47,12 +47,19 @@
     </header>
     <main class="container">
       <section>
-        <ul class="card-grid">
+        <ul class="gems-list">
           <% for project in @projects %>
-            <li class="card">
+            <li class="gem">
               <% if project.docs.size > 1 %>
                 <details>
-                  <summary><a href="<%= project.docs.last.url %>"><%= project.url %></a></summary>
+                  <summary>
+                    <div>
+                      <a href="<%= project.docs.last.url %>"><%= project.url %></a>
+                      <% if project.instance_variable_get(:@repository).is_a?(RorVsWildThemeRdoc::Source::Gem) %>
+                        <span class="summary"><%= project.instance_variable_get(:@repository).instance_variable_get(:@info)["info"] %></span>
+                      <% end %>
+                    </div>
+                  </summary>
                   <ul>
                     <% for doc in project.docs.reverse %>
                       <li><a href="<%= doc.url %>"><span class="version"><%= doc.version.number %></span></a></li>
@@ -60,7 +67,12 @@
                   </ul>
                 </details>
               <% else %>
-                <a href="<%= project.docs.first.url %>"><%= project.url %></a>
+                <div>
+                  <a href="<%= project.docs.first.url %>"><%= project.url %></a>
+                  <% if project.instance_variable_get(:@repository).is_a?(RorVsWildThemeRdoc::Source::Gem) %>
+                    <span class="summary"><%= project.instance_variable_get(:@repository).instance_variable_get(:@info)["info"] %></span>
+                  <% end %>
+                </div>
               <% end %>
             </li>
           <% end %>

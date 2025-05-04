@@ -1,7 +1,7 @@
 body {
   border-top: 8px solid var(--color-topbar);
   font-variant-numeric: tabular-nums;
-  --color-shadow: oklch(0.1 0.01 269 / 0.1)
+  --shadow: 0 2px 4px 0 oklch(0.1 0.01 269 / 0.04), 0 4px 8px 0 oklch(0.15 0.01 269 / 0.01);
 }
 
 body > header {
@@ -64,21 +64,20 @@ body > main {
   margin: 1rem auto;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-.card {
-  padding: 1rem;
-  background-color: var(--color-code-background);
-  box-shadow: 0 0 0 1px var(--color-border) inset;
+.gems-list {
+  display: block;
+  background-color: oklch(from var(--color-background) calc(l + 0.02) c h);
+  box-shadow: 0 0 0 1px var(--color-border) inset, var(--shadow);
   border-radius: 0.5rem;
-  font-weight: 700;
 }
 
-.card-grid .card a .version {
+.gem { padding: 1rem; }
+
+.gem a { font-weight: 700; }
+
+.gem + .gem { border-top: 1px solid var(--color-border); }
+
+.gem .version {
   display: inline-block;
   box-shadow: 0 0 0 1px var(--color-border) inset;
   background-color: var(--color-background);
@@ -86,19 +85,31 @@ body > main {
   text-decoration: none;
   padding: 0 0.5rem;
   border-radius: 0.75rem;
+  font-family: var(--font-mono);
   font-size: 0.833rem;
   font-weight: 400;
 }
 
-.card-grid .card a:hover .version {
-  color: inherit;
-}
+.gem a:hover .version { color: inherit; }
+
+details > summary { padding: 0; }
 
 details > summary:hover { cursor: pointer; }
 
 details > summary::after {
   top: 0;
   background-color: var(--color-background);
+}
+
+.summary {
+  display: block;
+  color: var(--color-text-light);
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
 }
 
 section.contact {
@@ -127,7 +138,7 @@ section.contact .button {
   background-color: transparent;
   color: var(--color-topbar-text);
   box-shadow: 0 0 0 1px oklch(from var(--color-topbar-text) l c h / 0.3) inset,
-              0 1px 2px 1px var(--color-shadow);
+             var(--shadow);
   margin-top: 1rem;
   text-decoration: none;
   font-weight: 700;
