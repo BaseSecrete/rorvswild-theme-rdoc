@@ -16,7 +16,9 @@ module RorVsWildThemeRdoc
       attr_reader :name, :dir
 
       def initialize(url)
-        @name = File.basename(@url = url, File.extname(@url))
+        @owner, @name = (@url = url).split("/")[-2..-1]
+        @name = File.basename(@name, File.extname(@name))
+        @info = JSON.parse(Net::HTTP.get(URI("https://api.github.com/repos/#{@owner}/#{@name}")))
         @dir = "source/git/#{name}"
       end
 
@@ -42,6 +44,10 @@ module RorVsWildThemeRdoc
         end
         result
       end
+
+      def description
+        @info["description"]
+      end
     end
 
     class Gem
@@ -62,6 +68,10 @@ module RorVsWildThemeRdoc
 
       def versions
         Gems.versions(name).map { |v| Version.new(v["number"]) }
+      end
+
+      def description
+        @info["info"]
       end
     end
   end
@@ -122,12 +132,7 @@ module RorVsWildThemeRdoc
     end
 
     def summary
-      if @source.is_a?(RorVsWildThemeRdoc::Source::Gem)
-        @source.instance_variable_get(:@info)["info"]
-      else
-        repo_name = @source.instance_variable_get(:@url).split('/').last(2).join('/').gsub('.git', '')
-        `curl -s https://api.github.com/repos/#{repo_name} | grep '"description":' | cut -d'"' -f4`.strip
-      end
+      @source.description
     end
   end
 
