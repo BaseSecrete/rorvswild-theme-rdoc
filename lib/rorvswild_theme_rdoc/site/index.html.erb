@@ -55,9 +55,7 @@
                   <summary>
                     <div>
                       <a href="<%= project.docs.last.url %>"><%= project.url %></a>
-                      <% if project.instance_variable_get(:@repository).is_a?(RorVsWildThemeRdoc::Source::Gem) %>
-                        <span class="summary"><%= project.instance_variable_get(:@repository).instance_variable_get(:@info)["info"] %></span>
-                      <% end %>
+                      <span class="summary"><%= project.summary %></span>
                     </div>
                   </summary>
                   <ul>
@@ -69,9 +67,7 @@
               <% else %>
                 <div>
                   <a href="<%= project.docs.first.url %>"><%= project.url %></a>
-                  <% if project.instance_variable_get(:@repository).is_a?(RorVsWildThemeRdoc::Source::Gem) %>
-                    <span class="summary"><%= project.instance_variable_get(:@repository).instance_variable_get(:@info)["info"] %></span>
-                  <% end %>
+                  <span class="summary"><%= project.summary %></span>
                 </div>
               <% end %>
             </li>

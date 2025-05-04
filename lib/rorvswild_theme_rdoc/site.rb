@@ -120,6 +120,15 @@ module RorVsWildThemeRdoc
     def dir
       @source.dir
     end
+
+    def summary
+      if @source.is_a?(RorVsWildThemeRdoc::Source::Gem)
+        @source.instance_variable_get(:@info)["info"]
+      else
+        repo_name = @source.instance_variable_get(:@url).split('/').last(2).join('/').gsub('.git', '')
+        `curl -s https://api.github.com/repos/#{repo_name} | grep '"description":' | cut -d'"' -f4`.strip
+      end
+    end
   end
 
   class Documentation
