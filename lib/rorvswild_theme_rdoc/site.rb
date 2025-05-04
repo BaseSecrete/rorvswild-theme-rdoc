@@ -31,6 +31,17 @@ module RorVsWildThemeRdoc
         system("git -C #{@dir} checkout #{tag}")
         @dir
       end
+
+      def versions
+        clone_quickly
+        result = []
+        `git -C #{@dir} tag`.split.each do |tag|
+          if ::Gem::Version.correct?(number = Version.tag_to_number(tag))
+            result << Version.new(tag)
+          end
+        end
+        result
+      end
     end
 
     class Gem
@@ -48,14 +59,20 @@ module RorVsWildThemeRdoc
         `curl -s #{@info["gem_uri"]} | tar -x --to-stdout --wildcards 'data.tar.gz' | tar -xz -C #{dir}`
         dir
       end
+
+      def versions
+        Gems.versions(name).map { |v| Version.new(v["number"]) }
+      end
     end
   end
 
   class Version
-    attr_reader :tag, :number, :short_number
+    include Comparable
+
+    attr_reader :tag, :number, :short_number, :gem_version
 
     # Normalize tag names since Ruby repository uses v3_4_0, but version numbers are written as 3.4.0.
-    def self.tag_to_version(tag)
+    def self.tag_to_number(tag)
       version = tag.gsub(/^[^\d]*/, "")
       version.tr!("_", ".")
       version
@@ -68,27 +85,40 @@ module RorVsWildThemeRdoc
       version[0...dot2]
     end
 
+    def self.latest_minors_since(versions, min_version)
+      versions.select { |v| min_version <= v }
+        .group_by { |v| v.short_number }
+        .map { |_, minors| minors.max }
+        .sort!
+    end
+
     def initialize(tag)
-      @number = self.class.tag_to_version(@tag = tag)
+      @number = self.class.tag_to_number(@tag = tag)
       @short_number = self.class.shorten_number(@number)
+      @gem_version = Gem::Version.new(number)
+    end
+
+    def <=>(other)
+      @gem_version <=> other.gem_version
     end
   end
 
   class Project
     attr_reader :docs, :url
 
-    def initialize(repository, tags)
-      @url = (@repository = repository).name
-      @versions = (@tags = tags).map { |tag| Version.new(tag) }
+    def initialize(source, min_version)
+      @url = (@source = source).name
+      @min_version = min_version
+      @versions = Version.latest_minors_since(@source.versions, min_version)
       @docs = @versions.map { |version| Documentation.new(self, version) }
     end
 
     def build_docs(dir)
-      @docs.each { |doc| doc.build(@repository.checkout(doc.version.tag), dir) }
+      @docs.each { |doc| doc.build(@source.checkout(doc.version.tag), dir) }
     end
 
     def dir
-      @repository.dir
+      @source.dir
     end
   end
 
@@ -113,8 +143,8 @@ module RorVsWildThemeRdoc
   end
 
   class Site
-    def initialize(urls_and_tags)
-      @projects = urls_and_tags.map { |(url, tags)| Project.new(Source.new(url), tags) }
+    def initialize(url_and_min_version)
+      @projects = url_and_min_version.map { |(url, min_version)| Project.new(Source.new(url), Version.new(min_version)) }
     end
 
     def build_docs
