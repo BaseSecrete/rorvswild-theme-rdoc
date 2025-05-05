@@ -172,13 +172,13 @@ section.support {
 }
 
 section.support .badge {
-  background-color: var(--color-code-background);
+  background-color: var(--color-background);
   box-shadow: 0 0 0 1px var(--color-border) inset;
   border-radius: 0.5rem;
   font-size: 0.694rem;
   line-height: 1rem;
   padding: 0.25rem 0.5rem;
-  top: -3.75rem;
+  top: -3.85rem;
   position: relative;
   display: inline-block;
 }
