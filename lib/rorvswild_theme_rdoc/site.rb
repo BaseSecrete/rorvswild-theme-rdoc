@@ -145,14 +145,19 @@ module RorVsWildThemeRdoc
     end
 
     def build(src_dir, doc_dir)
-      versionned_dir = File.join(doc_dir, @url)
-      title = "#{@project.url} #{@version.number} documentation"
-      options = ["--root=#{src_dir}", "--include=#{src_dir}/doc", "--title=#{title}", "--main=#{main_file(src_dir)}", "--output=#{versionned_dir}", "--template=rorvswild"]
+      options = {
+        root: src_dir,
+        template: "rorvswild",
+        main: main_file(src_dir),
+        output: File.join(doc_dir, @url),
+        include: File.join(src_dir, "doc"),
+        title: "#{@project.url} #{@version.number} documentation",
+      }.map { |(key,val)| "--#{key}=#{val}" }
       RDoc::RDoc.new.document(options)
     end
 
     def main_file(src_dir)
-      ["README.md", "README.rdoc", "README"].find { |file| File.exist?(File.join(src_dir, file)) }
+      ["doc/index.md", "README.md", "README.rdoc", "README"].find { |file| File.exist?(File.join(src_dir, file)) }
     end
   end
 
