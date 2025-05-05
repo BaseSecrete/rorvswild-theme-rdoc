@@ -107,6 +107,7 @@ table {
   margin: 0;
   border-spacing: 0;
   border-collapse: collapse;
+  font-size: 0.833rem;
 }
 
 table tr th, table tr td {
