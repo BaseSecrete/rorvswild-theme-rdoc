@@ -719,7 +719,6 @@ em {
 }
 
 .toggle-source {
-  margin-top: 1rem;
   font-size: 0.823rem;
   font-weight: 400;
   line-height: 1rem;
@@ -735,6 +734,8 @@ em {
   box-shadow: 0 0 0 1px var(--color-text-light);
   color: var(--color-title);
 }
+
+* + .toggle-source { margin-top: 1rem; }
 
 pre + .toggle-source { margin-top: 0.5rem; }
 
