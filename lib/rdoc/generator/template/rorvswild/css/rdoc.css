@@ -233,6 +233,8 @@ main h1 {
   word-break: break-word;
 }
 
+main h1:has(+ h1) { display: none; }
+
 main h1 + p {
   font-size: 1.383em;
   margin-top: 0.5rem;
