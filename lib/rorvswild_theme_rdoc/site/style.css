@@ -101,16 +101,25 @@ details > summary::after {
   background-color: var(--color-background);
 }
 
-.summary {
+.gem__title {
+  font-size: 1rem;
+  line-height: 1.5;
+  box-shadow: none;
+  margin: 0;
+}
+
+.gem__about {
   display: block;
   color: var(--color-text-light);
   margin: 0;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-line-clamp: 2;
           line-clamp: 2; 
   -webkit-box-orient: vertical;
 }
+
+.gem ul { margin-top: 0.5rem; }
 
 section.contact {
   padding: 3rem;
@@ -164,7 +173,7 @@ section.contact .button svg {
 section.support {
   width: auto;
   margin-top: 4rem;
-  padding: 3rem;
+  padding: 2rem;
   text-align: center;
   box-shadow: 0 0 0 1px var(--color-border) inset;
   border-radius: 0.5rem;
@@ -178,7 +187,7 @@ section.support .badge {
   font-size: 0.694rem;
   line-height: 1rem;
   padding: 0.25rem 0.5rem;
-  top: -3.85rem;
+  top: -2.85rem;
   position: relative;
   display: inline-block;
 }
