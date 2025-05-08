@@ -18,29 +18,36 @@ namespace :site do
   task build: ["site:build:pages", "site:build:docs"]
 
   def site
-    @site ||= RorVsWildThemeRdoc::Site.new(
-      "https://github.com/ruby/ruby.git" => "3.2",
-      "https://github.com/rails/rails.git" => "7.1",
-      # "addressable" => "2.6", # TODO: PR to fix headings level
-      # "bundler" => "2.4", # TODO: PR to fix headings level
-      # "concurrent-ruby" => "1.1", # TODO: broken image
-      "diff-lcs" => "1.4",
-      # "faraday" => "2.11", # TODO: broken image title
-      "ffi" => "1.15",
-      # "gems" => "1.1", # TODO: PR to fix headings level
-      "i18n" => "1.9",
-      "json" => "2.9",
-      "mime-types" => "3.4",
-      "minitest" => "5.23",
-      "multi_json" => "1.13",
-      "nokogiri" => "1.16",
-      # "public_suffix" => "5.1", # TODO: fix <small> in title
-      # "rack" => "2.2", # TODO: broken image title
-      "rake" => "13.0",
-      "rdoc" => "6.10",
-      "https://github.com/rspec/rspec.git" => "3.13",
-      "thor" => "1.1",
-      "tzinfo" => "1.1",
-    )
+    @site ||= RorVsWildThemeRdoc::Site.new([
+      {source: "https://github.com/ruby/ruby.git", min_version: "3.2"},
+      {source: "https://github.com/rails/rails.git", min_version: "7.1"},
+      {source: "addressable", min_version: "2.6"},
+      {source: "bundler", min_version: "2.4"},
+      {source: "diff-lcs", min_version: "1.4"},
+      {
+        source: "https://github.com/lostisland/faraday.git",
+        min_version: "2.11",
+        fitter: {copy: ["docs/_media/home-logo.svg"]},
+      },
+      {source: "ffi", min_version: "1.15"},
+      {source: "gems", min_version: "1.1"},
+      {source: "i18n", min_version: "1.9"},
+      {source: "json", min_version: "2.9"},
+      {source: "mime-types", min_version: "3.4"},
+      {source: "minitest", min_version: "5.23"},
+      {source: "multi_json", min_version: "1.13"},
+      {source: "nokogiri", min_version: "1.16"},
+      {source: "public_suffix", min_version: "5.1"},
+      {
+        source: "https://github.com/rack/rack.git",
+        min_version: "2.2",
+        fitter: {copy: ["contrib/rack.png", "contrib/logo.webp"]},
+      },
+      {source: "rake", min_version: "13.0"},
+      {source: "rdoc", min_version: "6.10"},
+      {source: "https://github.com/rspec/rspec.git", min_version: "3.13"},
+      {source: "thor", min_version: "1.1"},
+      {source: "tzinfo", min_version: "1.1"},
+    ])
   end
 end

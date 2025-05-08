@@ -114,11 +114,12 @@ module RorVsWildThemeRdoc
   end
 
   class Project
-    attr_reader :docs, :url
+    attr_reader :docs, :url, :fitter
 
-    def initialize(source, min_version)
+    def initialize(source, min_version, fitter)
       @url = (@source = source).name
       @min_version = min_version
+      @fitter = fitter
       @versions = Version.latest_minors_since(@source.versions, min_version)
       @docs = @versions.map { |version| Documentation.new(self, version) }
     end
@@ -149,11 +150,12 @@ module RorVsWildThemeRdoc
         root: src_dir,
         template: "rorvswild",
         main: main_file(src_dir),
-        output: File.join(doc_dir, @url),
+        output: dst_dir = File.join(doc_dir, @url),
         include: File.join(src_dir, "doc"),
         title: "#{@project.url} #{@version.number} documentation",
       }.map { |(key,val)| "--#{key}=#{val}" }
       RDoc::RDoc.new.document(options)
+      @project.fitter&.adjust(src_dir, dst_dir)
     end
 
     def main_file(src_dir)
@@ -161,9 +163,27 @@ module RorVsWildThemeRdoc
     end
   end
 
+  class Fitter
+    def initialize(options)
+      @options = options
+    end
+
+    def adjust(src_dir, doc_dir)
+      for path in @options[:copy]
+        next if !File.exist?(src_path = File.join(src_dir, path))
+        FileUtils.mkpath(File.dirname(dst_path = File.join(doc_dir, path)))
+        `cp -R #{src_path} #{dst_path}`
+       end
+    end
+  end
+
   class Site
-    def initialize(url_and_min_version)
-      @projects = url_and_min_version.map { |(url, min_version)| Project.new(Source.new(url), Version.new(min_version)) }
+    def initialize(data)
+      @projects = data.map { |params|
+        min_version = Version.new(params[:min_version])
+        fitter = params[:fitter] ? Fitter.new(params[:fitter]) : nil
+        Project.new(Source.new(params[:source]), min_version, fitter)
+      }
     end
 
     def build_docs
