@@ -81,6 +81,8 @@ h6:hover span {
   display: inline;
 }
 
+img { max-width: 100%; }
+
 :any-link {
   color: var(--color-primary);
   text-decoration: underline;
