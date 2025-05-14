@@ -46,7 +46,9 @@ namespace :site do
       {source: "rake", min_version: "13.0"},
       {source: "rdoc", min_version: "6.10"},
       {source: "https://github.com/rspec/rspec.git", min_version: "3.13"},
+      {source: "stimulus-rails", min_version: "1.3"},
       {source: "thor", min_version: "1.1"},
+      {source: "turbo-rails", min_version: "2.0"},
       {source: "tzinfo", min_version: "1.1"},
     ])
   end
