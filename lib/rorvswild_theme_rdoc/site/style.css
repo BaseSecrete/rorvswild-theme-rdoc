@@ -26,6 +26,7 @@ body > header {
   height: 32px;
   position: relative;
   overflow: visible;
+  animation: logo 1.42857143s linear infinite;
 }
 
 .logo svg polygon {
@@ -33,10 +34,51 @@ body > header {
   transition: all 0.1s ease-in-out;
 }
 
-.logo:hover svg polygon.poly-1 { transform: translateY(-1px); }
-.logo:hover svg polygon.poly-2 { transform: translateY(1px); }
-.logo:hover svg polygon.poly-3 { transform: translateX(1px); }
-.logo:hover svg polygon.poly-4 { transform: translateX(-1px); }
+.logo svg polygon.poly-1 { animation: logo-poly-1 1.42857143s alternate infinite; }
+.logo svg polygon.poly-2 { animation: logo-poly-2 1.42857143s alternate infinite; }
+.logo svg polygon.poly-3 { animation: logo-poly-3 1.42857143s alternate infinite; }
+.logo svg polygon.poly-4 { animation: logo-poly-4 1.42857143s alternate infinite; }
+
+.logo:hover svg polygon.poly-1 { 
+  animation: none;
+  transform: translateY(-1px);
+}
+.logo:hover svg polygon.poly-2 { 
+  animation: none;
+  transform: translateY(1px);
+}
+.logo:hover svg polygon.poly-3 { 
+  animation: none;
+  transform: translateX(1px);
+}
+.logo:hover svg polygon.poly-4 { 
+  animation: none;
+  transform: translateX(-1px);
+}
+
+@keyframes logo-poly-1 {
+  0% { transform: translateY(0); }
+  95% { transform: translateY(0); }
+  100% { transform: translateY(-1px); }
+}
+
+@keyframes logo-poly-2 {
+  0% { transform: translateY(0); }
+  95% { transform: translateY(0); }
+  100% { transform: translateY(1px); }
+}
+
+@keyframes logo-poly-3 {
+  0% { transform: translateX(0); }
+  95% { transform: translateX(0); }
+  100% { transform: translateX(1px); }
+}
+
+@keyframes logo-poly-4 {
+  0% { transform: translateX(0); }
+  95% { transform: translateX(0); }
+  100% { transform: translateX(-1px); }
+}
 
 .logo span {
   display: block;
@@ -69,6 +111,7 @@ body > main {
   background-color: oklch(from var(--color-background) calc(l + 0.02) c h);
   box-shadow: 0 0 0 1px var(--color-border) inset, var(--shadow);
   border-radius: 0.5rem;
+  margin: 0;
 }
 
 .gem { padding: 1rem; }
