@@ -48,11 +48,6 @@ namespace :site do
       {source: "https://github.com/rspec/rspec.git", min_version: "3.13"},
       {source: "stimulus-rails", min_version: "1.3"},
       {source: "thor", min_version: "1.1"},
-      {
-        source: "https://github.com/hotwired/turbo-rails.git",
-        min_version: "2.0",
-        fitter: {copy: ["assets/logo.png?sanitize=true"]},
-      },
       {source: "tzinfo", min_version: "1.1"},
     ])
   end

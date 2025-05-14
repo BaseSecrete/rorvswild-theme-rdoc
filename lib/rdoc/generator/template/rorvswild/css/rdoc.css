@@ -192,6 +192,8 @@ details > summary:has(> a) {
   width: 100%;
 }
 
+details > summary img { max-height: 3em; }
+
 summary::-webkit-details-marker { display: none; }
 
 details > summary::after {
@@ -233,6 +235,8 @@ main h1 {
   color: var(--color-title);
   word-break: break-word;
 }
+
+main h1 img { max-height: 3em; }
 
 main h1:has(+ h1) { display: none; }
 
