@@ -51,7 +51,7 @@ namespace :site do
       {
         source: "https://github.com/hotwired/turbo-rails.git",
         min_version: "2.0",
-        fitter: {copy: ["assets/logo.png"]},
+        fitter: {copy: ["assets/logo.png?sanitize=true"]},
       },
       {source: "tzinfo", min_version: "1.1"},
     ])
