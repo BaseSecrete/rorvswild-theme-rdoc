@@ -62,7 +62,7 @@ module RorVsWildThemeRdoc
       def checkout(version)
         versioned_named = "#{name}-#{version}"
         FileUtils.mkpath(dir = "source/gem/#{versioned_named}")
-        `curl -s #{@info["gem_uri"]} | tar -x --to-stdout --wildcards 'data.tar.gz' | tar -xz -C #{dir}`
+        `curl -s #{@info["gem_uri"]} | tar -x --to-stdout data.tar.gz | tar -xz -C #{dir}`
         dir
       end
 
@@ -146,15 +146,17 @@ module RorVsWildThemeRdoc
     end
 
     def build(src_dir, doc_dir)
-      options = {
-        root: src_dir,
-        template: "rorvswild",
-        main: main_file(src_dir),
-        output: dst_dir = File.join(doc_dir, @url),
-        include: File.join(src_dir, "doc"),
-        title: "#{@project.url} #{@version.number} documentation",
-      }.map { |(key,val)| "--#{key}=#{val}" }
-      RDoc::RDoc.new.document(options)
+      dst_dir = File.join(doc_dir, @url)
+      args = [
+        "--root", src_dir,
+        "--template", "rorvswild",
+        "--main", main_file(src_dir),
+        "--op", dst_dir,
+        "--title", "#{@project.url} #{@version.number} documentation",
+        "--exclude", "\.(rbs|sig)$",
+        src_dir
+      ]
+      RDoc::RDoc.new.document(args)
       @project.fitter&.adjust(src_dir, dst_dir)
     end
 
