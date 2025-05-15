@@ -149,6 +149,7 @@ details > summary::after {
   line-height: 1.5;
   box-shadow: none;
   margin: 0;
+  padding: 0;
 }
 
 .gem__about {
