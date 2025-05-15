@@ -21,6 +21,11 @@ namespace :site do
     @site ||= RorVsWildThemeRdoc::Site.new([
       {source: "https://github.com/ruby/ruby.git", min_version: "3.2"},
       {source: "https://github.com/rails/rails.git", min_version: "7.1"},
+      {
+        source: "https://github.com/BaseSecrete/active_hashcash.git",
+        min_version: "0.4.0",
+        fitter: {copy: ["active_hashcash_dashboard.png", "demo.gif", "logo.png", "rorvswild_logo.jpg"]},
+      },
       {source: "addressable", min_version: "2.6"},
       {source: "bundler", min_version: "2.4"},
       {source: "diff-lcs", min_version: "1.4"},
