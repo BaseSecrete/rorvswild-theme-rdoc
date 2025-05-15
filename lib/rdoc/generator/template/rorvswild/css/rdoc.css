@@ -223,9 +223,9 @@ main {
   margin: 0 auto;
 }
 
-main img[align=right] { padding: 1rem 0 1rem 1rem; }
+main img[align=right] { padding-left: 1rem; }
 
-main img[align=left] { padding: 1rem 1rem 1rem 0; }
+main img[align=left] { padding-right: 1rem; }
 
 main sup {
   vertical-align: super;
