@@ -223,6 +223,10 @@ main {
   margin: 0 auto;
 }
 
+main img[align=right] { padding: 1rem 0 1rem 1rem; }
+
+main img[align=left] { padding: 1rem 1rem 1rem 0; }
+
 main sup {
   vertical-align: super;
   font-size: 0.823em;
@@ -249,7 +253,8 @@ main h1 + p {
 main h2 {
   margin: 1.5em 0 0.5em;
   font-size: 1.476rem;
-  line-height: 3rem;
+  line-height: 2rem;
+  padding: 0.5rem 0;
   color: var(--color-title);
   box-shadow: 0 1px 0 0 var(--color-text-light);
 }
