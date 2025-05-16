@@ -25,12 +25,12 @@ module RorVsWildThemeRdoc
       def clone_quickly
         return if File.exist?(@dir)
         FileUtils.mkpath(parent_dir = File.dirname(@dir))
-        system("git -C #{parent_dir} clone --filter=tree:0 #{@url}")
+        system("git -C #{parent_dir} clone --filter=tree:0 --quiet #{@url}")
       end
 
       def checkout(tag)
         clone_quickly
-        system("git -C #{@dir} checkout #{tag}")
+        system("git -C #{@dir} checkout --quiet #{tag}")
         @dir
       end
 
@@ -160,6 +160,7 @@ module RorVsWildThemeRdoc
         "--exclude", "Gemfile.lock",
         "--exclude", "Rakefile",
         "--exclude", "\.(rbs|sig)$",
+        "--quiet",
         src_dir
       ]
       RDoc::RDoc.new.document(args)
