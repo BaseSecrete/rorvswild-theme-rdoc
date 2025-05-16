@@ -444,7 +444,6 @@ nav footer a:any-link {
   background-color: var(--color-highlight-background);
   border-radius: 3px;
   font-weight: 700;
-  cursor: initial;
 }
 
 .nav-section li a,
