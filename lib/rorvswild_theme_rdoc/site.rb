@@ -153,7 +153,12 @@ module RorVsWildThemeRdoc
         "--main", main_file(src_dir),
         "--op", dst_dir,
         "--title", "#{@project.url} #{@version.number} documentation",
-        "--exclude", "\.(rbs|sig)$",
+        "--exclude", "Gemfile",
+        "--exclude", "Gemfile.lock",
+        "--exclude", "Rakefile",
+        "--exclude", "Dockerfile",
+        "--exclude", "\.(rbs|sig|lock|gem|gemspec|yml|yaml|json|log|git|gitignore|travis|circle|github|editorconfig|rubocop|reek|simplecov|rspec|test|spec)$",
+        "--exclude", "\.(git|github|vscode|ruby-version|ruby-gemset|env|DS_Store)",
         src_dir
       ]
       RDoc::RDoc.new.document(args)
