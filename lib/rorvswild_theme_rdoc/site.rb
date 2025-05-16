@@ -114,14 +114,15 @@ module RorVsWildThemeRdoc
   end
 
   class Project
-    attr_reader :docs, :url, :fitter
+    attr_reader :docs, :url, :fitter, :options
 
-    def initialize(source, min_version, fitter)
+    def initialize(source, min_version, fitter, options)
       @url = (@source = source).name
       @min_version = min_version
       @fitter = fitter
       @versions = Version.latest_minors_since(@source.versions, min_version)
       @docs = @versions.map { |version| Documentation.new(self, version) }
+      @options = options
     end
 
     def build_docs(dir)
@@ -140,6 +141,8 @@ module RorVsWildThemeRdoc
   class Documentation
     attr_reader :url, :version
 
+    DEFAULT_INDEXES = ["doc/index.md", "README.md", "readme.md", "README.rdoc", "readme.rdoc", "README", "readme"]
+
     def initialize(project, version)
       @project, @version = project, version
       @url = File.join(project.url, @version.short_number)
@@ -150,7 +153,7 @@ module RorVsWildThemeRdoc
       args = [
         "--root", src_dir,
         "--template", "rorvswild",
-        "--main", main_file(src_dir),
+        "--main", index_file(src_dir),
         "--op", dst_dir,
         "--title", "#{@project.url} #{@version.number} documentation",
         "--exclude", "Gemfile",
@@ -163,8 +166,9 @@ module RorVsWildThemeRdoc
       @project.fitter&.adjust(src_dir, dst_dir)
     end
 
-    def main_file(src_dir)
-      ["doc/index.md", "README.md", "README.rdoc", "README"].find { |file| File.exist?(File.join(src_dir, file)) }
+    def index_file(src_dir)
+      (@project.options && @project.options[:index]) ||
+        DEFAULT_INDEXES.find { |file| File.exist?(File.join(src_dir, file)) }
     end
   end
 
@@ -187,7 +191,7 @@ module RorVsWildThemeRdoc
       @projects = data.map { |params|
         min_version = Version.new(params[:min_version])
         fitter = params[:fitter] ? Fitter.new(params[:fitter]) : nil
-        Project.new(Source.new(params[:source]), min_version, fitter)
+        Project.new(Source.new(params[:source]), min_version, fitter, params[:options])
       }
     end
 

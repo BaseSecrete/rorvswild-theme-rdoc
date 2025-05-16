@@ -50,7 +50,11 @@ namespace :site do
       },
       {source: "rake", min_version: "13.0"},
       {source: "rdoc", min_version: "6.10"},
-      {source: "https://github.com/rspec/rspec.git", min_version: "3.13"},
+      {
+        source: "https://github.com/rspec/rspec.git",
+        min_version: "3.13",
+        options: {index: "rspec-core/README.md"},
+      },
       {source: "stimulus-rails", min_version: "1.3"},
       {source: "thor", min_version: "1.1"},
       {source: "tzinfo", min_version: "1.1"},
