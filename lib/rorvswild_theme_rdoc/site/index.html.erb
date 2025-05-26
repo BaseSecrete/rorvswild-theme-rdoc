@@ -53,12 +53,12 @@
               <% if project.docs.size > 1 %>
                 <details>
                   <summary>
-                    <header>
+                    <hgroup>
                       <h2 class="gem__title">
                         <a href="<%= project.docs.last.url %>"><%= project.url %></a>
                       </h2>
-                      <p class="gem__about"><%= project.summary %></p>
-                    </header>
+                      <h3 class="gem__about"><%= project.summary %></h3>
+                    </hgroup>
                   </summary>
                   <ul>
                     <% for doc in project.docs.reverse %>
@@ -71,12 +71,12 @@
                   </ul>
                 </details>
               <% else %>
-                <div>
+                <hgroup>
                   <h2 class="gem__title">
                     <a href="<%= project.docs.first.url %>"><%= project.url %></a>
                   </h2>
-                  <p class="gem__about"><%= project.summary %></p>
-                </div>
+                  <h3 class="gem__about"><%= project.summary %></h3>
+                </hgroup>
               <% end %>
             </li>
           <% end %>

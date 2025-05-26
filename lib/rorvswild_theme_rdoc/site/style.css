@@ -154,6 +154,8 @@ details > summary::after {
 
 .gem__about {
   display: block;
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--color-text-light);
   margin: 0;
   overflow: hidden;
