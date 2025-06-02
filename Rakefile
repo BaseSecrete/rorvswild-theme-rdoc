@@ -23,7 +23,7 @@ namespace :site do
       {source: "https://github.com/rails/rails.git", min_version: "7.1"},
       {
         source: "https://github.com/BaseSecrete/active_hashcash.git",
-        min_version: "0.4.0",
+        min_version: "0.4",
         fitter: {copy: ["active_hashcash_dashboard.png", "demo.gif", "logo.png", "rorvswild_logo.jpg"]},
       },
       {source: "bundler", min_version: "2.4"},

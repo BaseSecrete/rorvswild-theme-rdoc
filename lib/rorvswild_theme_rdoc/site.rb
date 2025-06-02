@@ -159,7 +159,7 @@ module RorVsWildThemeRdoc
         "--exclude", "Gemfile",
         "--exclude", "Gemfile.lock",
         "--exclude", "Rakefile",
-        "--exclude", "\.(css|js|json|lock|rake|rbs|sh|sig|sqlite3|toml|tt|yaml)$",
+        "--exclude", "\.(css|js|json|lock|rake|rbs|sig|sqlite3|toml|tt|yaml)$",
         "--quiet",
         src_dir
       ]
