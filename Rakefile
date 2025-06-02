@@ -26,7 +26,6 @@ namespace :site do
         min_version: "0.4.0",
         fitter: {copy: ["active_hashcash_dashboard.png", "demo.gif", "logo.png", "rorvswild_logo.jpg"]},
       },
-      {source: "addressable", min_version: "2.6"},
       {source: "bundler", min_version: "2.4"},
       {source: "diff-lcs", min_version: "1.4"},
       {
@@ -55,7 +54,6 @@ namespace :site do
         min_version: "3.13",
         options: {index: "rspec-core/README.md"},
       },
-      {source: "stimulus-rails", min_version: "1.3"},
       {source: "thor", min_version: "1.1"},
       {source: "tzinfo", min_version: "1.1"},
     ])
