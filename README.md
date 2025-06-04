@@ -2,6 +2,7 @@
 
 [RDoc](https://github.com/ruby/rdoc) theme based on [RoRvsWild](https://www.rorvswild.com/) colors.
 More than colors, it modifies the layout, navigation, typography and overall look and feel.
+Also included in this repository is a script that generates [RubyRubyRubyRuby.dev](https://rubyrubyrubyruby.dev), a documentation website for Ruby, Rails, and a select group of gems.
 
 ![RoRvsWild theme RDoc Light](https://cdn.rorvswild.com/assets/blog/2024/rdoc_new-ad5d5ed01e18b11607278cdf97899209dfac8a752b2f0413e83b859b90f48009.png)
 
