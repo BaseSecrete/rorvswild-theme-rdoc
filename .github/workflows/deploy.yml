@@ -2,7 +2,9 @@ name: Deploy Ruby documentation
 
 on:
   push:
-    branches: ["master", "build_rails_doc"]
+    branches: ["master"]
+  schedule:
+    - cron: "37 13 * * 0"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
